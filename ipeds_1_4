@@ -1,0 +1,44 @@
+Tabla 1.4 
+##################################
+#Fuente de fondos: Central 
+##################################
+
+SELECT HD2011.STABBR, HD2011.INSTNM, F1011_F1A.F1B02, F1011_F1A.F1B10
+FROM HD2011 INNER JOIN F1011_F1A ON HD2011.UNITID = F1011_F1A.UNITID
+WHERE (((HD2011.STABBR)="PR"));
+
+##################################
+#Fuente de fondos: Regional 
+##################################
+
+SELECT HD2011.STABBR, HD2011.INSTNM, F1011_F1A.F1B03, F1011_F1A.F1B11
+FROM HD2011 INNER JOIN F1011_F1A ON HD2011.UNITID = F1011_F1A.UNITID
+WHERE (((HD2011.STABBR)="PR"));
+
+##################################
+Fuente de fondos: Local 
+##################################
+
+SELECT HD2011.STABBR, HD2011.INSTNM, F1011_F1A.F1B04A, F1011_F1A.F1B12
+FROM HD2011 INNER JOIN F1011_F1A ON HD2011.UNITID = F1011_F1A.UNITID
+WHERE (((HD2011.STABBR)="PR"));
+
+##################################
+Fuente de fondos: Aporte de hogares
+##################################
+
+SELECT HD2011.STABBR, HD2011.INSTNM, F1011_F1A.F1B01
+FROM HD2011 INNER JOIN F1011_F1A ON HD2011.UNITID = F1011_F1A.UNITID
+WHERE (((HD2011.STABBR)="PR"));
+
+SELECT HD2011.STABBR, HD2011.INSTNM, F1011_F1A.F1E08
+FROM HD2011 INNER JOIN F1011_F1A ON HD2011.UNITID = F1011_F1A.UNITID
+WHERE (((HD2011.STABBR)="PR"));
+
+##################################
+Fuente de fondos: Otras privadas 
+##################################
+
+SELECT HD2011.STABBR, HD2011.INSTNM, F1011_F1A.F1B04B, F1011_F1A.F1B16
+FROM HD2011 INNER JOIN F1011_F1A ON HD2011.UNITID = F1011_F1A.UNITID
+WHERE (((HD2011.STABBR)="PR"));
