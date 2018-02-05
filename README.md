@@ -1,4 +1,4 @@
-#H1Structured Query Language (SQL)
+# H1 Structured Query Language (SQL)
 
 A language for querying databases. 
 
