@@ -1,4 +1,4 @@
-<b style="font-size:300%;">Structured Query Language (SQL)</b>
+<b><font size="14">Structured Query Language (SQL)</font></b>
 
 A language for querying databases. 
 
