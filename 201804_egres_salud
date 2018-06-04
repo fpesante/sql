@@ -1,0 +1,19 @@
+Query1b.xlsx > todas las universidades con ofertas dentro de los cipcode 302, 312, 916, 816
+
+cipcode_efciplev.xlsx > Classification of Instructional Programs (CIPCODE) codevalue and value label; EF2014CP.EFCIPLEV value label for Major fields, status and level.
+
+***Query1c.xlsx > todas las universidades con ofertas dentro de los cipcode 312, 816, 916
+
+**Query1d.xlsx > todas las universidades con ofertas dentro del cipcode 302 y nivel de estudiantes (grad, subgrad) [effy2014.effylev].
+
+Query1f.xlsx > STABBR|INSTNM|EFCIPLEV (301, 816, 916)|valueLabel|LINE (29, 99)
+
+Query1e.xlsx > STABBR|INSTNM|EFCIPLEV(302,312,816,916)|CIPCODE|valueLabel|EFYTOTLT|EFFYLEV|LSTUDY		[iQuery1e.xlsx incluye crosstab. Issue para id CIPCODE graduados con 
+
+Query1e_b.xlsx > INSTNM|EFCIPLEV(302,312,816,916)|CIPCODE|valueLabel|EFYTOTLT|EFFYLEV(1,2,4)|LSTUDY(1,3,999)
+
+*Q3_a.xlsx > INSTNM|EFCIPLEV(302)|CIPCODE|valueLabel|LSTUDY(1) 
+[Salen cipcode fuera del 302]
+
+*Q3_b.xlsx > INSTNM|EFCIPLEV(302)|CIPCODE|valueLabel|LSTUDY(3) 
+[Salen cipcode fuera del 302]
