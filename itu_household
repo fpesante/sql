@@ -1,0 +1,69 @@
+SEX: Sex
+With the following Ranges:
+1  Male
+2  Female
+
+-- ITU_HH5_GENDER --
+SELECT WGTP, LAPTOP, COMPOTHX, TABLET, PWGTP, SEX
+FROM Psam_h72 LEFT JOIN Psam_p72_edited255 
+ON Psam_h72.SERIALNO = Psam_p72_edited255.SERIALNO
+WHERE LAPTOP ='1'
+OR COMPOTHX ='1'
+OR TABLET ='1';
+
+
+/* 
+ LAPTOP: Laptop or desktop 
+ With the following Ranges: 
+ 0  N/A (GQ/vacant) 
+ 1  Yes 
+ 2  No 
+
+COMPOTHX: Other computer equipment 
+ With the following Ranges: 
+ 0  N/A (GQ/vacant) 
+ 1  Yes 
+ 2  No 
+
+ TABLET: Tablet or other portable wireless computer 
+ With the following Ranges: 
+ 0  N/A (GQ/vacant) 
+1  Yes 
+ 2  No
+ */
+----------------------------------------------------
+-- ITU_HH10_GENDER --
+SELECT WGTP, SMARTPHONE, PWGTP, SEX
+FROM Psam_h72 LEFT JOIN Psam_p72_edited255 
+ON Psam_h72.SERIALNO = Psam_p72_edited255.SERIALNO
+WHERE SMARTPHONE ='1';
+
+/*
+SMARTPHONE: Smartphone
+
+With the following Ranges:
+0  N/A (GQ/vacant)
+1  Yes
+2  No
+*/
+---------------------------------------------------------
+ -- ITU_HH7_GENDER --
+SELECT WGTP, ACCESS, PWGTP, SEX
+FROM Psam_h72 
+LEFT JOIN Psam_p72_edited255 
+ON Psam_h72.SERIALNO = Psam_p72_edited255.SERIALNO
+WHERE ACCESS="1" 
+OR ACCESS="2";
+
+
+
+/*
+ACCESS
+Access to the Internet
+
+With the following Ranges:
+0  N/A (GQ/vacant)
+1  Yes, by paying a cell phone company or Internet service provider
+2  Yes, without paying a cell phone company or Internet service provider
+3  No access to the Internet at this house, apartment, or mobile home
+*/
