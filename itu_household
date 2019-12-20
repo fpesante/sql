@@ -1,7 +1,7 @@
-SEX: Sex
+/*SEX: Sex
 With the following Ranges:
 1  Male
-2  Female
+2  Female*/
 
 -- ITU_HH5_GENDER --
 SELECT WGTP, LAPTOP, COMPOTHX, TABLET, PWGTP, SEX
@@ -57,7 +57,7 @@ OR ACCESS="2";
 
 
 
-/*
+/* 
 ACCESS
 Access to the Internet
 
@@ -67,3 +67,24 @@ With the following Ranges:
 2  Yes, without paying a cell phone company or Internet service provider
 3  No access to the Internet at this house, apartment, or mobile home
 */
+---------------------------------------------------------
+/* ITU HH7 SEX OCCP */
+
+SELECT WGTP, ACCESS, PWGTP, SEX, OCCP
+FROM Psam_h72 LEFT JOIN Psam_p72_edited255 ON Psam_h72.SERIALNO = Psam_p72_edited255.SERIALNO
+WHERE ACCESS="1" 
+OR ACCESS="2";
+
+/* ITU HH10 SEX OCCP */
+SELECT WGTP, SMARTPHONE, PWGTP, SEX, OCCP
+FROM Psam_h72 LEFT JOIN Psam_p72_edited255 ON Psam_h72.SERIALNO = Psam_p72_edited255.SERIALNO
+WHERE SMARTPHONE ='1';
+
+/* ITU HH5 SEX OCCP */
+SELECT WGTP, LAPTOP, COMPOTHX, TABLET, PWGTP, SEX, OCCP
+FROM Psam_h72 LEFT JOIN Psam_p72_edited255 ON Psam_h72.SERIALNO = Psam_p72_edited255.SERIALNO
+WHERE LAPTOP ='1'
+OR COMPOTHX ='1'
+OR TABLET ='1';
+
+https://datos.estadisticas.pr/dataset/6d9daa33-e143-4c11-a04d-964b30a20861/resource/b4352938-d66b-4866-8a60-09098e0f1703/download/prcs_pums_files_docs_2018_1yr.zip
