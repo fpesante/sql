@@ -1,0 +1,318 @@
+Introduction to SQL
+#############################
+1. Selecting columns
+
+
+#############################
+2. Filtering rows
+
+
+
+#############################
+3.a. Aggregate Functions
+SELECT AVG(budget)
+FROM films;
+
+SELECT MAX(budget)
+FROM films;
+
+SELECT SUM(budget)
+FROM films;
+#	#	#	#	#	#	#	#
+3.b. Combining aggregate functions with WHERES
+
+SELECT SUM(budget)
+FROM films
+WHERE release_year >= 2010;
+#	#	#	#	#	#	#	#
+3.c. A note on arithmetic
+SELECT (4 * 3);
+
+SELECT (4 / 3);
+
+SELECT (4.0 / 3.0) AS result;
+#	#	#	#	#	#	#	#
+3.d. It's AS simple AS aliasing
+SELECT MAX(budget)
+FROM films;
+
+SELECT MAX(budget), MAX(duration)
+FROM films;
+
+SELECT MAX(budget) AS max_budget,
+       MAX(duration) AS max_duration
+FROM films;
+*	*	*	*	*	*	*	*	
+SELECT title, (gross - budget) AS net_profit
+FROM films;
+
+SELECT title, (duration/60.0) AS duration_hours
+FROM films;
+
+SELECT AVG(duration)/60.0 AS avg_duration_hours
+FROM films;
+#	#	#	#	#	#	#	#
+3.e. Even more aliasing
+SELECT 45 / 10 * 100.0;
+
+SELECT 45 * 100.0 / 10;
+*	*	*	*	*	*	*	*	
+SELECT COUNT(deathdate)/100.0 AS percentage_dead
+FROM people; ->
+
+SELECT COUNT(deathdate)*100.0/ COUNT(*) AS percentage_dead
+FROM people;
+
+SELECT MAX(release_year) - MIN(release_year) AS difference
+FROM films;
+
+SELECT (MAX(release_year) - MIN(release_year)) / 10.0
+AS number_of_decades
+FROM films;
+#############################
+4.a. ORDER BY
+
+SELECT title
+FROM films
+ORDER BY release_year DESC;
+#	#	#	#	#	#	#	#
+4.b. Sorting single columns
+SELECT name
+FROM people
+ORDER BY name;
+
+SELECT name, birthdate
+FROM people
+ORDER BY birthdate;
+#	#	#	#	#	#	#	#
+4.c. Sorting single columns (2)
+SELECT title
+FROM films
+WHERE release_year = 2000
+OR release_year = 2012; 
+
+SELECT * 
+FROM films
+WHERE release_year <= 2014
+ORDER BY duration;  ->
+
+SELECT * 
+FROM films
+WHERE release_year <> 2015
+ORDER BY duration; 
+
+SELECT title, gross
+FROM films
+WHERE title = 'M%'
+ORDER BY title;
+#	#	#	#	#	#	#	#
+4.d. Sorting single columns (DESC)
+SELECT name
+FROM people
+ORDER BY name DESC;
+
+SELECT imdb_score, film_id
+FROM reviews
+ORDER BY imdb_score DESC;
+
+SELECT title
+FROM films
+ORDER BY title DESC;
+
+SELECT title, duration
+FROM films
+ORDER BY duration DESC;
+#	#	#	#	#	#	#	#
+4.e. Sorting multiple columns
+
+SELECT birthdate, name
+FROM people
+ORDER BY birthdate, name;
+
+SELECT release_year, duration, title
+FROM films
+ORDER BY release_year, duration;
+
+SELECT certification, release_year, title
+FROM films
+ORDER BY certification, release_year;
+
+SELECT name, birthdate
+FROM people
+ORDER BY name, birthdate;
+#	#	#	#	#	#	#	#
+4.f. GROUP BY
+SELECT sex, count(*)
+FROM employees
+GROUP BY sex;
+
+-- Commonly, GROUP BY is used with aggregate functions like COUNT() or MAX(). Note that GROUP BY always goes after the FROM clause!
+
+-- GROUP BY is for performing operations within groups.
+#	#	#	#	#	#	#	#
+4.g. GROUP BY practice
+
+SELECT sex, count(*)
+FROM employees
+GROUP BY sex
+ORDER BY count DESC;
+
+SELECT release_year, count(*)
+FROM films
+GROUP BY release_year
+ORDER BY count;
+
+SELECT release_year, AVG(duration)
+FROM films
+GROUP BY release_year
+ORDER BY AVG;
+
+SELECT release_year, MAX(budget)
+FROM films
+GROUP BY release_year
+ORDER BY MAX;
+
+SELECT imdb_score, count(*)
+FROM reviews
+GROUP BY imdb_score
+ORDER BY count;
+#	#	#	#	#	#	#	#
+4.h. GROUP BY practice (2)
+
+SELECT release_year, MIN(gross)
+FROM films
+GROUP BY release_year
+ORDER BY MIN;
+
+SELECT language, SUM(gross)
+FROM films
+GROUP BY language
+ORDER BY SUM;
+
+SELECT country, SUM(budget)
+FROM films
+GROUP BY country
+ORDER BY SUM;
+
+SELECT release_year, MAX(budget)
+FROM films
+GROUP BY release_year, country
+ORDER BY MAX;
+
+SELECT release_year, country, MAX(budget)
+FROM films
+GROUP BY release_year, country
+ORDER BY release_year, country;
+
+SELECT country, release_year, MIN(gross)
+FROM films
+GROUP BY country, release_year
+ORDER BY country, release_year;
+#	#	#	#	#	#	#	#
+4.i. HAVING a great time
+
+SELECT release_year
+FROM films
+GROUP BY release_year
+WHERE COUNT(title) > 10;
+
+SELECT release_year
+FROM films
+GROUP BY release_year
+HAVING COUNT(title) > 10;
+
+SELECT release_year
+FROM films
+GROUP BY release_year
+HAVING COUNT(title) > 200;
+
+#	#	#	#	#	#	#	#
+4.j. All together now
+
+SELECT release_year, budget, gross
+FROM films;
+
+SELECT release_year, budget, gross
+FROM films
+WHERE release_year > 1990;
+
+SELECT release_year
+FROM films
+WHERE release_year > 1990
+GROUP BY release_year;
+
+SELECT release_year, AVG(budget)
+AS avg_budget, 
+AVG(gross) AS avg_gross
+FROM films
+WHERE release_year > 1990
+GROUP BY release_year;
+
+SELECT release_year, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross
+FROM films
+WHERE avg_budget > 60000000
+GROUP BY release_year
+HAVING AVG(budget) > 60000000;->
+
+*****SELECT release_year, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross
+FROM films
+WHERE release_year > 1990
+GROUP BY release_year
+HAVING AVG(budget) > 60000000
+ORDER BY avg_gross DESC;*****
+
+#	#	#	#	#	#	#	#
+4.k. All together now (2)
+
+SELECT COUNT(country), AVG(budget) AS avg_budget, 
+AVG(gross) AS avg_gross
+FROM films
+WHERE COUNT > 10
+GROUP BY country
+ORDER BY country
+LIMIT 5;
+
+SELECT country, AVG(budget) AS avg_budget, 
+AVG(gross) AS avg_gross
+FROM films
+WHERE COUNT(country) > 10
+ORDER BY country
+LIMIT 5;
+
+SELECT country, AVG(budget) AS avg_budget, 
+AVG(gross) AS avg_gross
+FROM films
+GROUP BY country
+HAVING COUNT(country)> 10
+LIMIT 5;
+
+SELECT country, AVG(budget) AS avg_budget, 
+AVG(gross) AS avg_gross
+FROM films
+GROUP BY country
+HAVING COUNT(country)>10
+LIMIT 5;
+
+SELECT country, AVG(budget) AS avg_budget, 
+AVG(gross) AS avg_gross
+FROM films
+GROUP BY country
+HAVING COUNT(title) > 10
+LIMIT 5; ->
+
+*****SELECT country, AVG(budget) AS avg_budget, 
+AVG(gross) AS avg_gross
+FROM films
+GROUP BY country
+HAVING COUNT(title) > 10
+ORDER BY country
+LIMIT 5;*****
+
+#	#	#	#	#	#	#	#
+4.l. A taste of things to come
+
+SELECT t imdb_score
+FROM films
+JOIN reviews
+ON films.id = reviews.film_id
+WHERE title = 'To Kill a Mockingbird';
